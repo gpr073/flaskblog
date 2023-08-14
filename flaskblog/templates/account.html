@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="content-section">
+        <div class="d-flex">
+            <div class="flex-shrink-0">
+                <img class="rounded account-img" src="userimage.jpg">
+            </div>
+            <div class="flex-grow-1 ms-3">
+                <h2 class="account-heading">{{ current_user.username }}</h2>
+                <p class="text-body-secondary">{{ current_user.email }}</p>
+            </div>
+        </div>
+        <!-- FORM HERE -->
+    </div>
+{% endblock content %}
