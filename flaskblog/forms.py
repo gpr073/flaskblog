@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, EmailField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, EmailField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import InputRequired, Length, Email, EqualTo, ValidationError
 from flaskblog.models import User
 
@@ -26,16 +26,14 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
-        if username.data != current_user.username:
-            user = User.query.filter_by(username=username.data).first()
-            if user:
-                raise ValidationError('That username is taken. Please choose a different one.')
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError('That username is taken. Please choose a different one.')
         
     def validate_email(self, email):
-        if email.data != current_user.email:
-            user = User.query.filter_by(email=email.data).first()
-            if user:
-                raise ValidationError('An account already exists with this email id.')
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError('An account already exists with this email id.')
 
 class LoginForm(FlaskForm):
     email = EmailField('Email', validators=[
@@ -69,3 +67,12 @@ class UpdateAccountForm(FlaskForm):
     #     user = User.query.filter_by(email=email.data).first()
     #     if user:
     #         raise ValidationError('An account already exists with this email id.')
+
+class PostForm(FlaskForm):
+    title = StringField('Title', validators=[
+        InputRequired()
+    ])
+    content = TextAreaField('Content', validators=[
+        InputRequired()
+    ])
+    submit = SubmitField('Post')
