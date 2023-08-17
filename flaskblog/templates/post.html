@@ -6,7 +6,7 @@
         </div>
         <div class="flex-grow-1 ms-3">
             <div class="article-metadata article-bottom">
-                <a href="#" class="me-2 text-decoration-none">{{ post.author.username }}</a>
+                <a href="{{ url_for('user_posts', username=post.author.username) }}" class="me-2 text-decoration-none">{{ post.author.username }}</a>
                 <small class="text-body-secondary">{{ post.date_posted.strftime('%b %d, %Y') }}</small>
             </div>
             <h2 class="article-title">{{ post.title }}</h2>
@@ -21,7 +21,7 @@
     </article>
     <!-- Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Post?</h1>
